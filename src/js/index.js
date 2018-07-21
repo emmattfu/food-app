@@ -1,5 +1,13 @@
 // Global app controller
-const a = 25;
-console.log('Hello world');
+
+
+import Search from './models/search'
+
+const controlSearch = async () =>
+
+// Set events
+document.querySelector('.search').addEventListener('submit', e => {
+   e.preventDefault();
+});
 
 

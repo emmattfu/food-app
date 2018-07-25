@@ -1,3 +1,5 @@
+import {api, key, proxy} from '../js/config';
+
 export default class Search {
     constructor(query){
         this.query = query;
@@ -5,13 +7,12 @@ export default class Search {
     }
 
     async getResult() {
-        const key = '56c114c9ee24fd0e851e676502796410';
         try {
-            const res = await fetch(`https://cors-anywhere.herokuapp.com/http://food2fork.com/api/search?key=${key}&q=${this.query}`);
+            const res = await fetch(`${proxy}${api}/search?key=${key}&q=${this.query}`);
             const data = await res.json();
             return this.result = data.recipes;
         } catch (error) {
-            console.log(error);
+            alert(error);
         }
     }
 }

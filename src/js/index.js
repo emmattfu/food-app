@@ -1,6 +1,8 @@
 // Global app controller
 import Search from '../models/search';
+import Recipe from  '../models/recipe';
 import * as searchView from './view/searchView';
+import * as recipeView from './view/recipeView';
 import { elements, clearLoader, renderLoader } from './view/base';
 
 /** Global state of the app
@@ -12,6 +14,7 @@ import { elements, clearLoader, renderLoader } from './view/base';
 
 const state = {};
 
+// search controler
 const controlSearch = async () => {
    // Получать данные из view
     const query = searchView.getSearchInputValue();
@@ -51,3 +54,28 @@ elements.searchResPages.addEventListener('click', e => {
    }
 });
 
+// Recipe controller
+const controlRecipe = async () => {
+    // get id from url
+    const id = window.location.hash.replace('#', '');
+
+    if (id) {
+
+        if (state.search) searchView.highLightSelected(id);
+        recipeView.clearRecipe();
+        renderLoader(elements.recipe);
+
+        // create new recipe object
+        state.recipe = new Recipe(id);
+
+        // get recipe data
+        await state.recipe.getRecipe();
+
+        clearLoader();
+        recipeView.renderRecipe(state.recipe.result);
+
+    }
+};
+
+window.addEventListener('hashchange', controlRecipe);
+window.addEventListener('load', controlRecipe);

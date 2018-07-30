@@ -4,7 +4,9 @@ export const elements = {
     searchRes: document.querySelector('.results'),
     searchList: document.querySelector('.results__list'),
     searchResPages: document.querySelector('.results__pages'),
-    recipe: document.querySelector('.recipe')
+    recipe: document.querySelector('.recipe'),
+    shoppingList: document.querySelector('.shopping__list'),
+    likesList: document.querySelector('.likes__list')
 };
 
 export const renderLoader = parent => {
